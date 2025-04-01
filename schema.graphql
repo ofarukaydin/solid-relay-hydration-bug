@@ -1,0 +1,302 @@
+type BaseProblem implements Problem {
+  message: String
+}
+
+input ChangePasswordInput {
+  newPassword: String!
+  oldPassword: String!
+}
+
+type ChangePasswordPayload {
+  user: User
+}
+
+type ChatMessage implements Node {
+  content: String
+  createdAt: Date
+  id: ID!
+  readStatus: MessageReadStatus
+  recipient: User
+  recipientId: ID
+  sender: User
+  senderId: ID
+  updatedAt: Date
+}
+
+type Comment implements Node {
+  content: String!
+  createdAt: Date
+  id: ID!
+  likes: Int
+  postId: ID
+  updatedAt: Date
+  userId: ID
+}
+
+input CreatePresignedUrlInput {
+  contentType: String! = "image/jpeg"
+}
+
+type CreatePresignedUrlPayload {
+  photoUrl: String
+  presignedUploadUrl: String
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address.
+"""
+scalar Email
+
+type FeedItem {
+  post: Post
+  postId: ULID
+}
+
+type LoginWithGooglePayload {
+  token: String
+  user: User
+}
+
+input MarkAllNotificationsAsReadInput {
+  noop: String
+}
+
+type MarkAllNotificationsAsReadPayload {
+  userNotification: UserNotification
+}
+
+enum MessageReadStatus {
+  Read
+  Unread
+}
+
+type Mutation {
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload
+  createPresignedUrl(input: CreatePresignedUrlInput!): CreatePresignedUrlPayload
+  dislikeComment(input: MutationDislikeCommentInput!): Comment
+  dislikePost(input: MutationDislikePostInput!): Post
+  editUser(input: MutationEditUserInput!): User
+  followUser(input: MutationFollowUserInput!): User
+  likeComment(input: MutationLikeCommentInput!): Comment
+  likePost(input: MutationLikePostInput!): Post
+  login(input: MutationLoginInput!): User
+  loginWithGoogle(idToken: String!): LoginWithGooglePayload
+  logout(name: String): Boolean
+  markAllNotificationsAsRead(input: MarkAllNotificationsAsReadInput!): MarkAllNotificationsAsReadPayload
+  register(input: MutationRegisterInput!): User
+  sendAComment(input: MutationSendACommentInput!): Comment
+  sendAPost(input: SendAPostInput!): SendAPostPayload
+  unfollowUser(input: MutationUnfollowUserInput!): User
+}
+
+input MutationDislikeCommentInput {
+  commentId: ID!
+}
+
+input MutationDislikePostInput {
+  postId: ID!
+}
+
+input MutationEditUserInput {
+  avatar: String
+  emailVerified: Boolean
+  theme: Theme
+}
+
+input MutationFollowUserInput {
+  dst: ID!
+}
+
+input MutationLikeCommentInput {
+  commentId: ID!
+}
+
+input MutationLikePostInput {
+  postId: ID!
+}
+
+input MutationLoginInput {
+  password: String!
+  username: String!
+}
+
+input MutationRegisterInput {
+  password: String!
+  username: String!
+}
+
+input MutationSendACommentInput {
+  content: String!
+  postId: ID!
+}
+
+input MutationUnfollowUserInput {
+  dst: ID!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Notification implements Node {
+  comment: Comment
+  commentId: ID
+  createdAt: Date
+  fromId: ID
+  id: ID!
+  message: String
+  post: Post
+  postId: ID
+  seen: NotificationSeenStatus
+  toId: ID
+  type: NotificationType
+  updatedAt: Date
+  username: String
+}
+
+enum NotificationSeenStatus {
+  Seen
+  Unseen
+}
+
+enum NotificationStatus {
+  Failed
+  Pending
+  Sent
+}
+
+enum NotificationType {
+  CommentReply
+  PostComment
+  PostLike
+  UserFollow
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Post implements Node {
+  comments: Int
+  content: String!
+  createdAt: Date
+  id: ID!
+  likes: Int
+  owner: User
+  ownerId: ID!
+  saves: Int
+  shares: Int
+  topics: [String!]
+  updatedAt: Date
+  views: Int
+}
+
+type PostsEdge {
+  cursor: String!
+  node: Post
+}
+
+interface Problem {
+  message: String
+}
+
+type Query {
+  getMyNotifications(after: String, before: String, first: Int, last: Int): QueryGetMyNotificationsConnection
+  getNotificationCount: UserNotification
+  getUserById(id: ID!): User
+  getUserByUsername(username: String!): User
+  isUsernameAvailable(username: String!): Boolean
+  me: User
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  personalizedFeed(after: String, before: String, first: Int, last: Int): QueryPersonalizedFeedConnection
+  posts(after: String, before: String, first: Int, last: Int): QueryPostsConnection
+}
+
+type QueryGetMyNotificationsConnection {
+  edges: [QueryGetMyNotificationsConnectionEdge]
+  pageInfo: PageInfo!
+}
+
+type QueryGetMyNotificationsConnectionEdge {
+  cursor: String!
+  node: Notification
+}
+
+type QueryPersonalizedFeedConnection {
+  edges: [QueryPersonalizedFeedConnectionEdge]
+  pageInfo: PageInfo!
+}
+
+type QueryPersonalizedFeedConnectionEdge {
+  cursor: String!
+  node: FeedItem
+}
+
+type QueryPostsConnection {
+  edges: [PostsEdge]
+  pageInfo: PageInfo!
+}
+
+input SendAPostInput {
+  content: String!
+  topics: [String!]!
+}
+
+type SendAPostPayload {
+  addedPost: Post
+  addedPostEdge: PostsEdge
+}
+
+enum Theme {
+  Dark
+  Light
+  System
+}
+
+"""ID"""
+scalar ULID
+
+type User implements Node {
+  avatar: String
+  followers(after: String, before: String, first: Int, last: Int): UserFollowersConnection
+  following(after: String, before: String, first: Int, last: Int): UserFollowingConnection
+  id: ID!
+  isFollowingViewer: Boolean
+  theme: Theme
+  username: String!
+  viewerIsFollowing: Boolean
+}
+
+type UserFollowersConnection {
+  edges: [UserFollowersConnectionEdge]
+  pageInfo: PageInfo!
+}
+
+type UserFollowersConnectionEdge {
+  cursor: String!
+  node: User
+}
+
+type UserFollowingConnection {
+  edges: [UserFollowingConnectionEdge]
+  pageInfo: PageInfo!
+}
+
+type UserFollowingConnectionEdge {
+  cursor: String!
+  node: User
+}
+
+type UserNotification {
+  unreadCount: Int!
+  userId: ID
+}
