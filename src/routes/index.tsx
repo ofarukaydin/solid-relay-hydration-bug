@@ -1,38 +1,16 @@
 import { Suspense } from "solid-js";
-import { createFragment, createPreloadedQuery, loadQuery, useRelayEnvironment } from "solid-relay";
-import { loadRootPreloadQuery } from "~/root.preload";
-import rootPreloadUserFragment, {
-  type rootPreloadUserFragment$data,
-  type rootPreloadUserFragment$key,
-} from "~/__generated__/rootPreloadUserFragment.graphql";
-import { Show, type JSX } from "solid-js";
-import rootQueryNode, { type rootPreloadQuery } from "~/__generated__/rootPreloadQuery.graphql";
-
-function useAuth(): { me: () => rootPreloadUserFragment$data | undefined | null } {
-  const query = createPreloadedQuery<rootPreloadQuery>(rootQueryNode, loadRootPreloadQuery);
-  const user = createFragment<rootPreloadUserFragment$key>(
-    rootPreloadUserFragment,
-    () => query()?.me
-  );
-  return {
-    me: user,
-  };
-}
-
-function AuthGuard(props: {
-  children: (me: rootPreloadUserFragment$data) => JSX.Element;
-  fallback: JSX.Element;
-}) {
-  const { me } = useAuth();
-
-  return (
-    <Show when={me()?.id} fallback={props.fallback}>
-      {props.children(me()!)}
-    </Show>
-  );
-}
+import { createMutation } from "solid-relay";
+import { graphql } from "relay-runtime";
+import { AuthGuard } from "~/components/auth-guard";
+import { Dropdown } from "~/components/profile-dropdown";
 
 function Header() {
+  const [logoutMutation, logoutMutationInFlight] = createMutation(graphql`
+    mutation routesLogoutMutation {
+      logout
+    }
+  `);
+
   return (
     <header class="bg-surface-layout-soft border-border-layout-1 sticky top-0 z-10 border-b py-6">
       <div class="flex items-center justify-between">
@@ -49,7 +27,23 @@ function Header() {
               </div>
             }
           >
-            {(me) => <div>You're logged in as {me.username}</div>}
+            {(me) => (
+              <div>
+                <Dropdown trigger={<span>You're logged in as {me()?.username}</span>}></Dropdown>
+                <button
+                  onClick={() => {
+                    logoutMutation({
+                      variables: {},
+                      onCompleted(response, errors) {
+                        window.location.reload();
+                      },
+                    });
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </AuthGuard>
         </div>
       </div>

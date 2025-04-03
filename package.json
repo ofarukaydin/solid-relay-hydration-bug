@@ -15,7 +15,7 @@
     "meros": "^1.3.0",
     "relay-runtime": "main",
     "solid-js": "^1.9.5",
-    "solid-relay": "1.0.0-beta.3",
+    "solid-relay": "1.0.0-beta.6",
     "tailwindcss": "^4.0.17",
     "vinxi": "^0.5.3"
   },

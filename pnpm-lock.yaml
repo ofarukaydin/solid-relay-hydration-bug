@@ -20,9 +20,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.17
         version: 4.0.17(vite@6.2.4(@types/node@22.13.16)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))
-      graphql:
-        specifier: ^16.10.0
-        version: 16.10.0
       meros:
         specifier: ^1.3.0
         version: 1.3.0(@types/node@22.13.16)
@@ -33,8 +30,8 @@ importers:
         specifier: ^1.9.5
         version: 1.9.5
       solid-relay:
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3(relay-runtime@0.0.0-main-bf82af0b)(seroval@1.2.1)(solid-js@1.9.5)
+        specifier: 1.0.0-beta.6
+        version: 1.0.0-beta.6(relay-runtime@0.0.0-main-bf82af0b)(seroval@1.2.1)(solid-js@1.9.5)
       tailwindcss:
         specifier: ^4.0.17
         version: 4.0.17
@@ -3303,8 +3300,8 @@ packages:
     peerDependencies:
       solid-js: ^1.3
 
-  solid-relay@1.0.0-beta.3:
-    resolution: {integrity: sha512-jxeAWc+Q/xPfqHYKKcfJh1B6sDIjvNdCBuYDBmuvRSMu8zQLvh5oRuMRZZrjkA/ZOi6QviEpr7sUx3TGj3DvWQ==}
+  solid-relay@1.0.0-beta.6:
+    resolution: {integrity: sha512-PCDRKa/oJJyxUp9sLKY7ZtVtTnHtMGfMz9QgXddzGT9AcldxZrorFo2Brxh1rWZYymM6HgoG7r8ex7IHiSy9pA==}
     peerDependencies:
       relay-runtime: ^18.1.0
       seroval: ^1.1.0
@@ -7393,7 +7390,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  solid-relay@1.0.0-beta.3(relay-runtime@0.0.0-main-bf82af0b)(seroval@1.2.1)(solid-js@1.9.5):
+  solid-relay@1.0.0-beta.6(relay-runtime@0.0.0-main-bf82af0b)(seroval@1.2.1)(solid-js@1.9.5):
     dependencies:
       '@solid-primitives/utils': 6.3.0(solid-js@1.9.5)
       dequal: 2.0.3

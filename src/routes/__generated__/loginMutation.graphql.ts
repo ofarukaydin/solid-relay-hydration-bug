@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<128f7a61d7adde89b9b25e032af0fc26>>
+ * @generated SignedSource<<3e819fb076fe99e239a2033ba6bdb831>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,21 +10,41 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type rootPreloadQuery$variables = Record<PropertyKey, never>;
-export type rootPreloadQuery$data = {
-  readonly me: {
+export type MutationLoginInput = {
+  password: string;
+  username: string;
+};
+export type loginMutation$variables = {
+  input: MutationLoginInput;
+};
+export type loginMutation$data = {
+  readonly login: {
     readonly __typename: "User";
     readonly __id: string;
     readonly " $fragmentSpreads": FragmentRefs<"loginUserUpdateFragment" | "rootPreloadUserFragment">;
   } | null | undefined;
 };
-export type rootPreloadQuery = {
-  response: rootPreloadQuery$data;
-  variables: rootPreloadQuery$variables;
+export type loginMutation = {
+  response: loginMutation$data;
+  variables: loginMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "input"
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "input",
+    "variableName": "input"
+  }
+],
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -33,59 +53,58 @@ var v0 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "rootPreloadQuery",
+    "name": "loginMutation",
     "selections": [
       {
         "alias": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "User",
         "kind": "LinkedField",
-        "name": "me",
+        "name": "login",
         "plural": false,
         "selections": [
           {
             "args": null,
             "kind": "FragmentSpread",
+            "name": "rootPreloadUserFragment"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
             "name": "loginUserUpdateFragment"
           },
-          (v0/*: any*/),
+          (v2/*: any*/),
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
             "name": "__id",
             "storageKey": null
-          },
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "rootPreloadUserFragment"
           }
         ],
         "storageKey": null
       }
     ],
-    "type": "Query",
+    "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "rootPreloadQuery",
+    "name": "loginMutation",
     "selections": [
       {
         "alias": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "User",
         "kind": "LinkedField",
-        "name": "me",
+        "name": "login",
         "plural": false,
         "selections": [
-          (v0/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -113,23 +132,24 @@ return {
             "kind": "ScalarField",
             "name": "username",
             "storageKey": null
-          }
+          },
+          (v2/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "ba117c315bf46a231421889fe5d331ad",
+    "cacheID": "137a2468063f2435d322ccf0463c033f",
     "id": null,
     "metadata": {},
-    "name": "rootPreloadQuery",
-    "operationKind": "query",
-    "text": "query rootPreloadQuery {\n  me {\n    ...loginUserUpdateFragment\n    ...rootPreloadUserFragment\n    id\n  }\n}\n\nfragment loginUserUpdateFragment on User {\n  __typename\n}\n\nfragment rootPreloadUserFragment on User {\n  id\n  theme\n  avatar\n  username\n}\n"
+    "name": "loginMutation",
+    "operationKind": "mutation",
+    "text": "mutation loginMutation(\n  $input: MutationLoginInput!\n) {\n  login(input: $input) {\n    ...rootPreloadUserFragment\n    ...loginUserUpdateFragment\n    id\n  }\n}\n\nfragment loginUserUpdateFragment on User {\n  __typename\n}\n\nfragment rootPreloadUserFragment on User {\n  id\n  theme\n  avatar\n  username\n}\n"
   }
 };
 })();
 
-(node as any).hash = "ce5267536057e435357a9820b768d738";
+(node as any).hash = "f09307333fcf92ee00282fbcf6db4485";
 
 export default node;
