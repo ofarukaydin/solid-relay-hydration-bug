@@ -12,7 +12,7 @@ export function useAuth(): { me: () => rootPreloadUserFragment$data | undefined 
   const query = createPreloadedQuery<rootPreloadQuery>(rootQueryNode, loadRootPreloadQuery);
   const user = createFragment<rootPreloadUserFragment$key>(
     rootPreloadUserFragment,
-    () => query()?.me
+    () => query()?.meFake
   );
   return {
     me: user,
@@ -24,7 +24,6 @@ export function AuthGuard(props: {
   fallback: JSX.Element;
 }) {
   const { me } = useAuth();
-
   return (
     <Show when={me()?.id} fallback={props.fallback}>
       {props.children(me)}

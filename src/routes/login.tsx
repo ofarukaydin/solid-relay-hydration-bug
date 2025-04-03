@@ -46,25 +46,26 @@ export default function LoginForm() {
         const { updatableData } = store.readUpdatableQuery<loginUserUpdateQuery>(
           graphql`
             query loginUserUpdateQuery @updatable {
-              me {
+              meFake {
                 ...loginUserUpdateFragment
               }
             }
           `,
           {}
         );
-        updatableData.me = response?.login;
+        updatableData.meFake = response?.login;
       },
     });
   };
 
   return (
     <div class="center flex h-full w-full">
+      <a href="/">go to home</a>
       <div>
         <div class="m-auto grid h-full w-full max-w-2xl gap-8">
           <div class="grid justify-center gap-4">
             <div class="grid gap-1">
-              <p>Welcome back!</p>
+              <p>Welcome back</p>
               <p>We're so excited to see you again!</p>
             </div>
           </div>

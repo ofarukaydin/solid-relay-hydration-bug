@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<45a4c52dcf839b4e22e82a62cd7be6ba>>
+ * @generated SignedSource<<c8b487b93ff1498a36a62e8e25033101>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,8 +12,8 @@ import { ConcreteUpdatableQuery } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type loginUserUpdateQuery$variables = Record<PropertyKey, never>;
 export type loginUserUpdateQuery$data = {
-  get me(): Record<PropertyKey, never> | null | undefined;
-  set me(value: {
+  get meFake(): Record<PropertyKey, never> | null | undefined;
+  set meFake(value: {
     readonly __typename: "User";
     readonly __id: string;
     readonly " $fragmentSpreads": FragmentRefs<"loginUserUpdateFragment">;
@@ -36,7 +36,7 @@ const node: ConcreteUpdatableQuery = {
         "args": null,
         "concreteType": "User",
         "kind": "LinkedField",
-        "name": "me",
+        "name": "meFake",
         "plural": false,
         "selections": [
           {
@@ -54,6 +54,6 @@ const node: ConcreteUpdatableQuery = {
   "kind": "UpdatableQuery"
 };
 
-(node as any).hash = "849a3a9a0a0fd4b99e3e696b050f944a";
+(node as any).hash = "9345ce9f3610db18b06d06b848d1d0be";
 
 export default node;

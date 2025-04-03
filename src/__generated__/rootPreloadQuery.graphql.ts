@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<128f7a61d7adde89b9b25e032af0fc26>>
+ * @generated SignedSource<<5871ef974ed1554f1acfa23a9d474f11>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,7 @@ import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type rootPreloadQuery$variables = Record<PropertyKey, never>;
 export type rootPreloadQuery$data = {
-  readonly me: {
+  readonly meFake: {
     readonly __typename: "User";
     readonly __id: string;
     readonly " $fragmentSpreads": FragmentRefs<"loginUserUpdateFragment" | "rootPreloadUserFragment">;
@@ -43,7 +43,7 @@ return {
         "args": null,
         "concreteType": "User",
         "kind": "LinkedField",
-        "name": "me",
+        "name": "meFake",
         "plural": false,
         "selections": [
           {
@@ -82,7 +82,7 @@ return {
         "args": null,
         "concreteType": "User",
         "kind": "LinkedField",
-        "name": "me",
+        "name": "meFake",
         "plural": false,
         "selections": [
           (v0/*: any*/),
@@ -120,16 +120,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ba117c315bf46a231421889fe5d331ad",
+    "cacheID": "25384c919ac9fb9ad235969010f22466",
     "id": null,
     "metadata": {},
     "name": "rootPreloadQuery",
     "operationKind": "query",
-    "text": "query rootPreloadQuery {\n  me {\n    ...loginUserUpdateFragment\n    ...rootPreloadUserFragment\n    id\n  }\n}\n\nfragment loginUserUpdateFragment on User {\n  __typename\n}\n\nfragment rootPreloadUserFragment on User {\n  id\n  theme\n  avatar\n  username\n}\n"
+    "text": "query rootPreloadQuery {\n  meFake {\n    ...loginUserUpdateFragment\n    ...rootPreloadUserFragment\n    id\n  }\n}\n\nfragment loginUserUpdateFragment on User {\n  __typename\n}\n\nfragment rootPreloadUserFragment on User {\n  id\n  theme\n  avatar\n  username\n}\n"
   }
 };
 })();
 
-(node as any).hash = "ce5267536057e435357a9820b768d738";
+(node as any).hash = "95aee017b25f1d4e5cb0dd242bafd615";
 
 export default node;

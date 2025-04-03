@@ -15,7 +15,7 @@ const rootPreloadUserFragment = graphql`
 
 const rootPreloadQuery = graphql`
   query rootPreloadQuery {
-    me {
+    meFake {
       ...loginUserUpdateFragment
       ...rootPreloadUserFragment
     }

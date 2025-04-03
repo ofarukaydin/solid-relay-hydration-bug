@@ -87,7 +87,9 @@ type Mutation {
   login(input: MutationLoginInput!): User
   loginWithGoogle(idToken: String!): LoginWithGooglePayload
   logout(name: String): Boolean
-  markAllNotificationsAsRead(input: MarkAllNotificationsAsReadInput!): MarkAllNotificationsAsReadPayload
+  markAllNotificationsAsRead(
+    input: MarkAllNotificationsAsReadInput!
+  ): MarkAllNotificationsAsReadPayload
   register(input: MutationRegisterInput!): User
   sendAComment(input: MutationSendACommentInput!): Comment
   sendAPost(input: SendAPostInput!): SendAPostPayload
@@ -209,15 +211,26 @@ interface Problem {
 }
 
 type Query {
-  getMyNotifications(after: String, before: String, first: Int, last: Int): QueryGetMyNotificationsConnection
+  getMyNotifications(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): QueryGetMyNotificationsConnection
   getNotificationCount: UserNotification
   getUserById(id: ID!): User
   getUserByUsername(username: String!): User
   isUsernameAvailable(username: String!): Boolean
   me: User
+  meFake: User
   node(id: ID!): Node
   nodes(ids: [ID!]!): [Node]!
-  personalizedFeed(after: String, before: String, first: Int, last: Int): QueryPersonalizedFeedConnection
+  personalizedFeed(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): QueryPersonalizedFeedConnection
   posts(after: String, before: String, first: Int, last: Int): QueryPostsConnection
 }
 
@@ -262,7 +275,9 @@ enum Theme {
   System
 }
 
-"""ID"""
+"""
+ID
+"""
 scalar ULID
 
 type User implements Node {
